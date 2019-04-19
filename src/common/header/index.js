@@ -1,7 +1,7 @@
-import React, { } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
-import { actionCreators }  from './store';
+import { actionCreators } from './store';
 import {
   HeaderWrapapper,
   Logo,
@@ -10,56 +10,92 @@ import {
   NavSearch,
   Addition,
   Button,
+  SearchInfo,
+  SearchInfoTitle,
+  SearchInfoSwitch,
+  SearchInfoItem,
+  SearchInfoList,
   SearchWrapper
 } from './style';
-const Header = (props) => {
-  return (
-    <HeaderWrapapper>
-      <Logo href='./' />
-      <Nav>
-        <NavItem className='left active'>首页</NavItem>
-        <NavItem className='left'>下载App</NavItem>
-        <NavItem className='right'>登录</NavItem>
-        <NavItem className='right'>
-          <span className='iconfont'>&#xe636;</span>
-        </NavItem>
-        <SearchWrapper>
-          <CSSTransition
-            in={props.focused}
-            timeout={200}
-            classNames="slide"
-          >
-            <NavSearch
-              className={props.focused ? 'focused' : ''}
-              onFocus={props.handelInputFocus}
-              onBlur={props.handelInputBlur}
+
+class Header extends Component {
+  getListArea(show) {
+    if (show) {
+      return (
+        <SearchInfo>
+          <SearchInfoTitle>
+            热门搜索
+          <SearchInfoSwitch>
+              换一批
+          </SearchInfoSwitch>
+          </SearchInfoTitle>
+          <SearchInfoList >
+            <SearchInfoItem>jojo</SearchInfoItem>
+            <SearchInfoItem>jojo</SearchInfoItem>
+            <SearchInfoItem>jojo</SearchInfoItem>
+            <SearchInfoItem>jojo</SearchInfoItem>
+            <SearchInfoItem>jojo</SearchInfoItem>
+            <SearchInfoItem>jojo</SearchInfoItem>
+          </SearchInfoList>
+        </SearchInfo>
+      )
+    } else {
+      return null;
+    }
+  }
+  render() {
+    return (
+      <HeaderWrapapper>
+        <Logo href='./' />
+        <Nav>
+          <NavItem className='left active'>首页</NavItem>
+          <NavItem className='left'>下载App</NavItem>
+          <NavItem className='right'>登录</NavItem>
+          <NavItem className='right'>
+            <span className='iconfont'>&#xe636;</span>
+          </NavItem>
+          <SearchWrapper>
+            <CSSTransition
+              in={this.props.focused}
+              timeout={200}
+              classNames="slide"
             >
-            </NavSearch>
-          </CSSTransition>
-          <span className=
-            {props.focused ? 'focused iconfont' : 'iconfont'}>&#xe637;
-              </span>
-        </SearchWrapper>
-      </Nav>
-      <Addition>
-        <Button className='writting'>
-          <span className='iconfont'>&#xe616;</span>文章
+              <NavSearch
+                className={this.props.focused ? 'focused' : ''}
+                onFocus={this.props.handelInputFocus}
+                onBlur={this.props.handelInputBlur}
+              >
+              </NavSearch>
+            </CSSTransition>
+            <span className=
+              {this.props.focused ? 'focused iconfont' : 'iconfont'}>&#xe637;
+          </span>
+            {this.getListArea(this.props.focused)}
+          </SearchWrapper>
+        </Nav>
+        <Addition>
+          <Button className='writting'>
+            <span className='iconfont'>&#xe616;</span>文章
                     </Button>
-        <Button className='reg'>注册</Button>
-      </Addition>
-    </HeaderWrapapper>
-  )
+          <Button className='reg'>注册</Button>
+        </Addition>
+      </HeaderWrapapper>
+    )
+  }
 }
+
 
 
 const mapStateToProps = (state) => {
   return {
-    focused: state.header.get('focused')
+    // focused: state.getIn(['header', 'focused']) === focused: state.get('header').get('focused')
+    focused: state.getIn(['header', 'focused'])
   }
 }
 const mapDispathTpProps = (dispatch) => {
   return {
     handelInputFocus() {
+      
       dispatch(actionCreators.searchFocus())
     },
     handelInputBlur() {

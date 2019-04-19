@@ -19,8 +19,9 @@ import {
 } from './style';
 
 class Header extends Component {
-  getListArea(show) {
-    if (show) {
+  
+  getListArea() {
+    if (this.props.focused) {
       return (
         <SearchInfo>
           <SearchInfoTitle>
@@ -29,13 +30,18 @@ class Header extends Component {
               换一批
           </SearchInfoSwitch>
           </SearchInfoTitle>
-          <SearchInfoList >
+          <SearchInfoList>
+          {
+            this.props.list.map((item) => {
+              return <SearchInfoItem key={item}>{item}</SearchInfoItem>
+            })
+          }
+            {/* <SearchInfoItem>jojo</SearchInfoItem>
             <SearchInfoItem>jojo</SearchInfoItem>
             <SearchInfoItem>jojo</SearchInfoItem>
             <SearchInfoItem>jojo</SearchInfoItem>
             <SearchInfoItem>jojo</SearchInfoItem>
-            <SearchInfoItem>jojo</SearchInfoItem>
-            <SearchInfoItem>jojo</SearchInfoItem>
+            <SearchInfoItem>jojo</SearchInfoItem> */}
           </SearchInfoList>
         </SearchInfo>
       )
@@ -67,10 +73,10 @@ class Header extends Component {
               >
               </NavSearch>
             </CSSTransition>
-            <span className=
+            <i className=
               {this.props.focused ? 'focused iconfont' : 'iconfont'}>&#xe637;
-          </span>
-            {this.getListArea(this.props.focused)}
+          </i>
+            {this.getListArea()}
           </SearchWrapper>
         </Nav>
         <Addition>
@@ -89,14 +95,15 @@ class Header extends Component {
 const mapStateToProps = (state) => {
   return {
     // focused: state.getIn(['header', 'focused']) === focused: state.get('header').get('focused')
-    focused: state.getIn(['header', 'focused'])
+    focused: state.getIn(['header', 'focused']),
+    lsit: state.getIn(['header', 'list'])
   }
 }
 const mapDispathTpProps = (dispatch) => {
   return {
     handelInputFocus() {
-      
-      dispatch(actionCreators.searchFocus())
+      dispatch(actionCreators.searchFocus());
+      dispatch(actionCreators.getList());
     },
     handelInputBlur() {
       dispatch(actionCreators.searchBlur())

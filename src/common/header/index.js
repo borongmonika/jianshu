@@ -31,17 +31,11 @@ class Header extends Component {
           </SearchInfoSwitch>
           </SearchInfoTitle>
           <SearchInfoList>
-          {
-            this.props.list.map((item) => {
-              return <SearchInfoItem key={item}>{item}</SearchInfoItem>
-            })
-          }
-            {/* <SearchInfoItem>jojo</SearchInfoItem>
-            <SearchInfoItem>jojo</SearchInfoItem>
-            <SearchInfoItem>jojo</SearchInfoItem>
-            <SearchInfoItem>jojo</SearchInfoItem>
-            <SearchInfoItem>jojo</SearchInfoItem>
-            <SearchInfoItem>jojo</SearchInfoItem> */}
+            {
+              this.props.list.map((item)=>{
+                return <SearchInfoItem key={item}>{item}</SearchInfoItem>
+              })
+            }
           </SearchInfoList>
         </SearchInfo>
       )
@@ -96,14 +90,14 @@ const mapStateToProps = (state) => {
   return {
     // focused: state.getIn(['header', 'focused']) === focused: state.get('header').get('focused')
     focused: state.getIn(['header', 'focused']),
-    lsit: state.getIn(['header', 'list'])
+    list: state.getIn(['header', 'list'])
   }
 }
 const mapDispathTpProps = (dispatch) => {
   return {
     handelInputFocus() {
-      dispatch(actionCreators.searchFocus());
       dispatch(actionCreators.getList());
+      dispatch(actionCreators.searchFocus());  
     },
     handelInputBlur() {
       dispatch(actionCreators.searchBlur())

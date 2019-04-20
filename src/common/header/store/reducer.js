@@ -15,7 +15,9 @@ export default (state = defaultState, action) => {
         return state.set('focused', false)
     }
     if(action.type === constants.CHANGE_LIST){
+        console.log(action.data)
         return state.set('list', action.data)
+       
     }
     return state;
 }

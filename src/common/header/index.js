@@ -54,7 +54,7 @@ class Header extends Component {
     }
   }
   render() {
-    const { focused, handelInputFocus, handelInputBlur } = this.props
+    const { focused, handelInputFocus, handelInputBlur, list } = this.props
     return (
       <HeaderWrapapper>
         <Logo href='./' />
@@ -73,7 +73,7 @@ class Header extends Component {
             >
               <NavSearch
                 className={focused ? 'focused' : ''}
-                onFocus={handelInputFocus}
+                onFocus={() => handelInputFocus(list)}
                 onBlur={handelInputBlur}
               >
               </NavSearch>
@@ -109,8 +109,11 @@ const mapStateToProps = (state) => {
 }
 const mapDispathTpProps = (dispatch) => {
   return {
-    handelInputFocus() {
-      dispatch(actionCreators.getList());
+    handelInputFocus(list) {
+      // if (list.size > 0 ) {
+      //   dispatch(actionCreators.getList());
+      // }
+      (list.size === 0 ) && dispatch(actionCreators.getList());
       dispatch(actionCreators.searchFocus());  
     },
     handelInputBlur() {

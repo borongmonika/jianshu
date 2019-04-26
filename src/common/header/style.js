@@ -4,7 +4,7 @@ import logoPic from '../../statics/logo-jianshu.png'
 export const HeaderWrapapper = styled.div`
     position: relative;
     height: 58px;
-    width:70%;
+    ${'' /* width:70%; */}
     margin: 0 auto;
     border-bottom: 1px solid #f0f0f0;
 

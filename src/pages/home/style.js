@@ -6,7 +6,7 @@ export const HomeWrapper = styled.div`
     margin: 0 auto;
 `
 export const HomeRight = styled.div`
-    width: 240px;
+    width: 280px;
     float: right;
 `
 export const HomeLeft = styled.div`
@@ -73,4 +73,15 @@ export const ListInfo = styled.div`
       font-size: 13px;
       color: #999
     }
+`
+export const RecommendWrapper = styled.div`
+    padding: 30px 0;
+    width: 280px;
+    
+`
+export const RecommendItem = styled.div`
+    width: 280px;
+    height: 50px;
+    background: url(${(props) => props.imgUrl});
+    background-size: contain;
 `

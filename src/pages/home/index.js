@@ -3,6 +3,7 @@ import Topic from './components/Topic';
 import List from './components/List';
 import Writer from './components/Writer';
 import Recommend from './components/Recommend';
+import axios from 'axios';
 
 import {
   HomeWrapper,
@@ -10,6 +11,11 @@ import {
   HomeLeft
 } from './style'
 class Home extends Component {
+  componentDidMount() {
+    axios.get('/api/home.json').then((res)=>{
+      console.log(res)
+    })
+  }
   render() {
     return (
       <HomeWrapper>

@@ -34,7 +34,7 @@ export const TopicItem = styled.div`
     margin-left: 18px;
     margin-bottom: 10px;
     font-size: 14px;
-    color: ##000;;
+    color: ##000;
     background: #f7f7f7;
     border: 1px solid #dcdcdc;
     border-radius: 4px;

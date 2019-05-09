@@ -1,0 +1,1 @@
+export const CHANGE_DETAIL = './deatil/CHANGE_DETAIL';

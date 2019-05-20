@@ -4,7 +4,7 @@ import * as constants from './constants';
 
 const defaultState = fromJS({
     title:'',
-    content:''})
+    content:''});
 
 export default (state = defaultState, action) => {
     switch(action.type) {
